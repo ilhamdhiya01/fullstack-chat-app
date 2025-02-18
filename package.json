@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build --filter=frontend",
+    "build": "yarn install && turbo run build --filter=frontend",
     "preview": "turbo run serve",
     "lint": "eslint \"frontend/**/*.{ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint \"frontend/**/*.{ts,tsx}\" --fix",
