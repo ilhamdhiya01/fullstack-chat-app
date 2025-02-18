@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import helmet from "helmet";
 import path from "path";
 import { connectDB } from "./lib/db.js";
 import authRouter from "./routes/auth.router.js";
@@ -22,6 +23,17 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
+  })
+);
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        imgSrc: ["'self'", "data:", "https://chatingan-asyik.onrender.com"],
+      },
+    },
   })
 );
 
