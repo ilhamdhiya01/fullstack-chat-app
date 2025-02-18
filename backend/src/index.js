@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(5001, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   connectDB();
 });
