@@ -1,12 +1,17 @@
 import type { AxiosError } from "axios";
 
+import {
+  PATH_API_BE_CHECK_USER,
+  PATH_API_BE_LOGIN,
+  PATH_API_BE_SIGNUP,
+} from "../../../constants/routes";
 import type { LoginFormData } from "../../../constants/schema/LoginSchema";
 import type { SignupFormData } from "../../../constants/schema/SignupSchema";
 import api from "../../../lib/axios";
 
 export const checkUser = async () => {
   try {
-    const response = await api.get("/auth/check");
+    const response = await api.get(PATH_API_BE_CHECK_USER);
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
@@ -17,7 +22,7 @@ export const checkUser = async () => {
 
 export const signup = async (data: SignupFormData) => {
   try {
-    const response = await api.post("/auth/signup", data);
+    const response = await api.post(PATH_API_BE_SIGNUP, data);
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
@@ -28,7 +33,7 @@ export const signup = async (data: SignupFormData) => {
 
 export const login = async (data: LoginFormData) => {
   try {
-    const response = await api.post("/auth/login", data);
+    const response = await api.post(PATH_API_BE_LOGIN, data);
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;

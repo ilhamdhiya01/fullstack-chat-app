@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ROUTES from "../../../../constants/routes";
+import { ROUTES } from "../../../../constants/routes";
 import AuthImagePattern from "../AuthImagePattern";
 import AuthLogo from "../AuthLogo";
 

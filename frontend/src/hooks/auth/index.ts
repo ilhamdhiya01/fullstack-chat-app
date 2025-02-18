@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { CHECK_USER } from "../../constants/queryKey";
 import { checkUser } from "../../services/fetcher/auth";
 
 const useAuth = () => {
@@ -8,7 +9,7 @@ const useAuth = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["check-user"],
+    queryKey: [CHECK_USER],
     queryFn: checkUser,
   });
 

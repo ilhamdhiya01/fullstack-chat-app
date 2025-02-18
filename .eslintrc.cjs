@@ -40,6 +40,7 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/require-default-props": "off",
+    "linebreak-style": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "func-style": ["error", "expression"],
     "arrow-body-style": ["error", "as-needed"],

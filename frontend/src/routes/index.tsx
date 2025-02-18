@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import LoadingScreen from "../components/shared/LoadingScreen";
-import ROUTES from "../constants/routes";
+import { ROUTES } from "../constants/routes";
 import AuthLayout from "../layouts/Auth";
 import MainLayout from "../layouts/Main";
 

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Navigate } from "react-router-dom";
 
 import LoadingScreen from "../components/shared/LoadingScreen";
-import ROUTES from "../constants/routes";
+import { ROUTES } from "../constants/routes";
 import useAuth from "../hooks/auth";
 
 interface PublicRouteProps {

@@ -1,4 +1,4 @@
-const ROUTES = {
+export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   PROFILE: "/profile",
@@ -6,4 +6,6 @@ const ROUTES = {
   SIGNUP: "/signup",
 } as const;
 
-export default ROUTES;
+export const PATH_API_BE_CHECK_USER = "/auth/check";
+export const PATH_API_BE_LOGIN = "/auth/login";
+export const PATH_API_BE_SIGNUP = "/auth/signup";
