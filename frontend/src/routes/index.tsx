@@ -1,13 +1,13 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
+import LoadingScreen from "../components/shared/LoadingScreen";
 import ROUTES from "../constants/routes";
 import AuthLayout from "../layouts/Auth";
 import MainLayout from "../layouts/Main";
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-import LoadingScreen from "../components/shared/LoadingScreen";
 
 const HomePage = lazy(() => import("../pages/Home"));
 const LoginPage = lazy(() => import("../pages/Login"));

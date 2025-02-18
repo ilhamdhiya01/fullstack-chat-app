@@ -1,7 +1,7 @@
+import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
-import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
   const { email, password, fullName } = req.body;

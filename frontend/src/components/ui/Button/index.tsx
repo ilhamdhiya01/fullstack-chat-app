@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/display-name */
 import React, { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { tv } from "tailwind-variants";
@@ -11,7 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   isDisabled?: boolean;
   fullWidth?: boolean;
-  isIconButton?: boolean;
+  // isIconButton?: boolean;
   withAnimation?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
@@ -31,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       isDisabled = false,
       fullWidth = false,
-      isIconButton = false,
+      // isIconButton = false,
       withAnimation = false,
       startIcon,
       endIcon,

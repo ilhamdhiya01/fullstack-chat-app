@@ -1,7 +1,8 @@
 import type { AxiosError } from "axios";
+
+import type { LoginFormData } from "../../../constants/schema/LoginSchema";
+import type { SignupFormData } from "../../../constants/schema/SignupSchema";
 import api from "../../../lib/axios";
-import { SignupFormData } from "../../../constants/schema/SignupSchema";
-import { LoginFormData } from "../../../constants/schema/LoginSchema";
 
 export const checkUser = async () => {
   try {

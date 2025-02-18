@@ -10,13 +10,52 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build --filter=frontend",
-    "preview": "turbo run serve"
+    "preview": "turbo run serve",
+    "lint": "eslint \"frontend/**/*.{ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint \"frontend/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"frontend/**/*.{ts,tsx}\"",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
   },
   "main": "index.js",
   "repository": "git@github.com:ilhamdhiya01/fullstack-chat-app.git",
   "author": "ilhamdhiya01 <ulhaqilhamdhiya@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "turbo": "^2.4.2"
+    "turbo": "^2.4.2",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@eslint/js": "^9.17.0",
+    "@tanstack/eslint-plugin-query": "^5.66.1",
+    "@types/json-schema": "^7.0.15",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.7.2",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "typescript": "~5.0.4",
+    "typescript-eslint": "^8.18.2"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

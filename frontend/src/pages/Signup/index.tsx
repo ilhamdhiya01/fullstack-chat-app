@@ -1,14 +1,10 @@
-import SignupForm from "../../components/module/Auth/SignupForm";
 import AuthTemplate from "../../components/module/Auth/AuthTemplate";
+import SignupForm from "../../components/module/Auth/SignupForm";
 
-const SignupPage = () => {
-  return (
-    <>
-      <AuthTemplate>
-        <SignupForm />
-      </AuthTemplate>
-    </>
-  );
-};
+const SignupPage = () => (
+  <AuthTemplate>
+    <SignupForm />
+  </AuthTemplate>
+);
 
 export default SignupPage;

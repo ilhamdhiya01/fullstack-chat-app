@@ -1,5 +1,11 @@
-import React, { forwardRef, MouseEventHandler } from "react";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/display-name */
+
 import classNames from "classnames";
+import type { MouseEventHandler } from "react";
+import React, { forwardRef } from "react";
 import { tv } from "tailwind-variants";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -19,7 +25,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      className,
+      // className,
       type = "text",
       inputSize = "md",
       label,
@@ -63,67 +69,63 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       },
     });
     return (
-      <>
+      <div
+        className={classNames("form-control w-full", {
+          "max-w-xs": !fullWidth,
+        })}
+      >
+        {label && (
+          <label className="label">
+            <span className="label-text font-medium flex items-center gap-1">
+              {label}
+              {isRequired && <span className="text-red-500">*</span>}
+            </span>
+          </label>
+        )}
         <div
-          className={classNames("form-control w-full", {
-            "max-w-xs": !fullWidth,
+          className={input({
+            size: inputSize,
+            variant: inputVariant,
+            fullWidth,
+            className: "flex items-center gap-2",
           })}
         >
-          {label && (
-            <label className="label">
-              <span className="label-text font-medium flex items-center gap-1">
-                {label}
-                {isRequired && <span className="text-red-500">*</span>}
-              </span>
-            </label>
+          {inputPrefix && (
+            <div
+              className={classNames({
+                "pointer-events-none": !prefixOnClick,
+                "cursor-pointer": prefixOnClick,
+              })}
+              onClick={prefixOnClick}
+            >
+              {inputPrefix}
+            </div>
           )}
-          <div
-            className={input({
-              size: inputSize,
-              variant: inputVariant,
-              fullWidth,
-              className: "flex items-center gap-2",
-            })}
-          >
-            {inputPrefix && (
-              <div
-                className={classNames({
-                  "pointer-events-none": !prefixOnClick,
-                  "cursor-pointer": prefixOnClick,
-                })}
-                onClick={prefixOnClick}
-              >
-                {inputPrefix}
-              </div>
-            )}
-            <input
-              ref={ref}
-              {...props}
-              type={type}
-              placeholder={placeholder}
-              className="w-full"
-            />
-            {inputSuffix && (
-              <div
-                className={classNames({
-                  "pointer-events-none": !suffixOnClick,
-                  "cursor-pointer": suffixOnClick,
-                })}
-                onClick={suffixOnClick}
-              >
-                {inputSuffix}
-              </div>
-            )}
-          </div>
-          {errorMessage && (
-            <div className="label">
-              <span className="label-text-alt text-red-500">
-                {errorMessage}
-              </span>
+          <input
+            ref={ref}
+            {...props}
+            type={type}
+            placeholder={placeholder}
+            className="w-full"
+          />
+          {inputSuffix && (
+            <div
+              className={classNames({
+                "pointer-events-none": !suffixOnClick,
+                "cursor-pointer": suffixOnClick,
+              })}
+              onClick={suffixOnClick}
+            >
+              {inputSuffix}
             </div>
           )}
         </div>
-      </>
+        {errorMessage && (
+          <div className="label">
+            <span className="label-text-alt text-red-500">{errorMessage}</span>
+          </div>
+        )}
+      </div>
     );
   },
 );
