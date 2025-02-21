@@ -16,7 +16,10 @@ const AuthTemplate = ({ children, isLogin = false }: AuthTemplateProps) => (
     <div className="flex flex-col justify-center items-center p-6 sm:p-12">
       <div className="w-full max-w-md space-y-4">
         {/* Logo */}
-        <AuthLogo />
+        <AuthLogo
+          title={isLogin ? "👋 Welcome back!" : "Signup"}
+          subtitle={isLogin ? "Sign in to your account" : "Create your account"}
+        />
         {/* Form */}
         {children}
         <div className="text-center">
