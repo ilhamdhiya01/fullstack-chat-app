@@ -3,12 +3,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import classNames from "classnames";
-import type { MouseEvent } from "react";
 
 import type { DropdownItemProps } from ".";
 
 interface DropdownItemPropsWithData extends DropdownItemProps {
-  data?: any;
+  // data?: any;
 }
 
 const DropdownItem = ({
@@ -16,12 +15,12 @@ const DropdownItem = ({
   label,
   onSelect,
   icon,
-  data,
+  // data,
 }: DropdownItemPropsWithData) => (
   <li className="dropdown-item">
     <div
-      onClick={(event: MouseEvent) => {
-        if (onSelect) onSelect(event, data);
+      onClick={() => {
+        if (onSelect) onSelect();
       }}
       className={classNames(
         "leading-none flex items-center cursor-pointer relative",

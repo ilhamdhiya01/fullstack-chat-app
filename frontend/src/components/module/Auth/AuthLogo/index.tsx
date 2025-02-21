@@ -1,6 +1,11 @@
 import { MessageSquare } from "lucide-react";
 
-const AuthLogo = () => (
+interface AuthLogoProps {
+  title: string;
+  subtitle: string;
+}
+
+const AuthLogo = ({ title, subtitle }: AuthLogoProps) => (
   <div className="text-center mb-8">
     <div className="flex flex-col items-center gap-2 group">
       <div
@@ -9,8 +14,8 @@ const AuthLogo = () => (
       >
         <MessageSquare className="size-6 text-primary" />
       </div>
-      <h1 className="text-2xl font-bold mt-2">Create Account</h1>
-      <p className="text-base-content/60">Get started with your free account</p>
+      <h1 className="text-2xl font-bold mt-2">{title}</h1>
+      <p className="text-base-content/60">{subtitle}</p>
     </div>
   </div>
 );
