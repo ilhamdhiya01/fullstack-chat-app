@@ -18,7 +18,7 @@ const Avatar = ({
       <img
         src={picture}
         alt="Profile"
-        className="size-32 rounded-full object-cover border-4 "
+        className="size-24 md:size-32 rounded-full object-cover border-4 border-base-content"
       />
       <label
         htmlFor="avatar-upload"
@@ -30,7 +30,7 @@ const Avatar = ({
           },
         )}
       >
-        <Camera className="w-5 h-5 text-base-200" />
+        <Camera className="w-4 h-4 md:w-5 md:h-5 text-base-200" />
         <input
           type="file"
           id="avatar-upload"
@@ -41,7 +41,7 @@ const Avatar = ({
         />
       </label>
     </div>
-    <p className="text-sm text-zinc-400">
+    <p className="text-sm text-base-content/70 text-center ">
       {isLaoding
         ? "Uploading..."
         : "Click the camera icon to update your photo"}

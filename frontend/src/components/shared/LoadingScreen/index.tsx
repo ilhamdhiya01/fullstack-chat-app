@@ -1,9 +1,17 @@
 import { Loader } from "lucide-react";
 
-const LoadingScreen = () => (
-  <div className="flex h-screen w-screen items-center justify-center">
-    <Loader className="animate-spin size-10" />
-  </div>
-);
+import useThemeStore from "../../../stores/theme/useThemeStore";
+
+const LoadingScreen = () => {
+  const { theme } = useThemeStore();
+  return (
+    <div
+      data-theme={theme}
+      className="flex h-screen w-screen items-center justify-center"
+    >
+      <Loader className="animate-spin size-10 text-base-content" />
+    </div>
+  );
+};
 
 export default LoadingScreen;
