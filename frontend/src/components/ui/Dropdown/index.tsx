@@ -59,14 +59,13 @@ const Dropdown = ({
       <div tabIndex={0}>{triggerChildren}</div>
       <ul
         tabIndex={0}
-        className="dropdown-content border menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+        className="dropdown-content border border-base-content/50 menu bg-base-100 rounded-box z-[1] w-52 shadow"
       >
         {menuItems.map((item, index) => {
           switch (item.type) {
             case undefined:
             case "item":
               return <DropdownItem key={index} {...item} />;
-
             case "separator":
               return <DropdownSeparator key={index} />;
             default:

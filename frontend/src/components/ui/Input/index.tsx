@@ -106,7 +106,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
             type={type}
             placeholder={placeholder}
-            className="w-full"
+            className="w-full placeholder:text-base-content/50"
           />
           {inputSuffix && (
             <div

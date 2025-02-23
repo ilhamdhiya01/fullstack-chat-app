@@ -1,16 +1,20 @@
 import { Outlet } from "react-router-dom";
 
 import Navbar from "../../components/shared/Navbar";
+import useThemeStore from "../../stores/theme/useThemeStore";
 
-const MainLayout = () => (
-  <>
-    <Navbar />
-    <div className="min-h-screen">
-      <div className="container mx-auto px-4">
-        <Outlet />
+const MainLayout = () => {
+  const { theme } = useThemeStore();
+  return (
+    <div data-theme={theme}>
+      <Navbar />
+      <div className="min-h-screen">
+        <div className="container mx-auto px-4">
+          <Outlet />
+        </div>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 export default MainLayout;

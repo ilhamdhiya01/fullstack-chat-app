@@ -49,9 +49,11 @@ const ProfileForm = () => {
     mutationFn: updateProfile,
     onSuccess: () => {
       toast.success("Profile updated successfully");
+      setIsEditing(false);
       refetch();
     },
     onError: (error: any) => {
+      setIsEditing(false);
       toast.error(error.response?.data.message);
     },
   });
