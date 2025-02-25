@@ -12,7 +12,7 @@ import { updateProfile } from "../../../../services/fetcher/auth";
 import { compressImage } from "../../../../utils/helpers";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
-import Avatar from "../Avatar";
+import ProfileImage from "../ProfileImage";
 
 const ProfileForm = () => {
   const { userAuthenticated, refetch } = useAuth();
@@ -82,7 +82,7 @@ const ProfileForm = () => {
 
   return (
     <>
-      <Avatar
+      <ProfileImage
         handleImageUpload={handleImageUpload}
         picture={selectedImg || userAuthenticated?.profilePic || "/avatar.png"}
         disabled={!isEditing}

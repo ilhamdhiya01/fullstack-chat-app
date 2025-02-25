@@ -4,3 +4,8 @@ export const INITIAL_THEME_STORE: ThemeState = {
       (localStorage.getItem("chat-theme") as Theme)) ||
     "coffee",
 };
+
+export const INITIAL_MESSAGE_STORE: MessageState = {
+  userSelected: null,
+  showSidebar: false,
+};

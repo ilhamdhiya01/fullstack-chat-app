@@ -1,3 +1,15 @@
+interface ApiResponse<T> {
+  data: T;
+  // message: string;
+  status: number;
+}
+
+interface GeneralResponse {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 type User = CheckUserResponse;
 
 type TypeFormatDate =
