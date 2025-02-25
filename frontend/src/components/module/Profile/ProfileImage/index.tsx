@@ -1,23 +1,24 @@
 import classNames from "classnames";
 import { Camera } from "lucide-react";
 
-interface AvatarProps {
+import Avatar from "../../../shared/Avatar";
+
+interface ProfileImageProps {
   picture: string;
   disabled: boolean;
   isLaoding: boolean;
   handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Avatar = ({
+const ProfileImage = ({
   picture,
   handleImageUpload,
   disabled,
   isLaoding,
-}: AvatarProps) => (
+}: ProfileImageProps) => (
   <div className="flex flex-col items-center gap-4">
     <div className="relative">
-      <img
-        src={picture}
-        alt="Profile"
+      <Avatar
+        image={picture}
         className="size-24 md:size-32 rounded-full object-cover border-4 border-base-content"
       />
       <label
@@ -49,4 +50,4 @@ const Avatar = ({
   </div>
 );
 
-export default Avatar;
+export default ProfileImage;
