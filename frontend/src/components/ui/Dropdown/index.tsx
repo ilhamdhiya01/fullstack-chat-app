@@ -4,7 +4,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
-import type { MouseEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { tv } from "tailwind-variants";
 
 import DropdownItem from "./DropdownItem";
@@ -13,7 +13,8 @@ import DropdownSeparator from "./DropdownSeparator";
 export interface DropdownItemProps {
   type?: "item" | "separator";
   label?: string;
-  onSelect?: (event: MouseEvent, data?: any) => Promise<boolean | void>;
+  // onSelect?: (event: MouseEvent, data?: any) => Promise<boolean | void>;
+  onSelect?: () => void;
   icon?: ReactNode;
   disabled?: boolean;
 }
@@ -23,14 +24,14 @@ interface DropdownProps {
   menuItems: Array<DropdownItemProps>;
   align?: "end";
   side?: "top" | "right" | "bottom" | "left";
-  data?: any;
+  // data?: any;
 }
 
 const Dropdown = ({
   menuItems,
   triggerChildren,
   align,
-  data,
+  // data,
   side,
 }: DropdownProps) => {
   const dropdown = tv({
@@ -58,14 +59,13 @@ const Dropdown = ({
       <div tabIndex={0}>{triggerChildren}</div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow mt-2"
+        className="dropdown-content border border-base-content/50 menu bg-base-100 rounded-box z-[1] w-52 shadow"
       >
         {menuItems.map((item, index) => {
           switch (item.type) {
             case undefined:
             case "item":
-              return <DropdownItem key={index} {...item} data={data} />;
-
+              return <DropdownItem key={index} {...item} />;
             case "separator":
               return <DropdownSeparator key={index} />;
             default:

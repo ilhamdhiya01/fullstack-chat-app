@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 
 import type { SignupFormData } from "../../../../constants/schema/SignupSchema";
 import { SignupSchema } from "../../../../constants/schema/SignupSchema";
-import useAuth from "../../../../hooks/auth";
+import { useAuth } from "../../../../hooks/auth";
 import { signup } from "../../../../services/fetcher/auth";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";

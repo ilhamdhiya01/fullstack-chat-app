@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import LoadingScreen from "../components/shared/LoadingScreen";
 import { ROUTES } from "../constants/routes";
-import useAuth from "../hooks/auth";
+import { useAuth } from "../hooks/auth";
 
 interface PublicRouteProps {
   children: React.ReactNode;

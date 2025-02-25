@@ -1,11 +1,16 @@
 import { Outlet } from "react-router-dom";
 
-const AuthLayout = () => (
-  <div className="min-h-screen">
-    <div className="container mx-auto px-4">
-      <Outlet />
+import useThemeStore from "../../stores/theme/useThemeStore";
+
+const AuthLayout = () => {
+  const { theme } = useThemeStore();
+  return (
+    <div data-theme={theme} className="min-h-screen">
+      <div className="container mx-auto px-4">
+        <Outlet />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default AuthLayout;
