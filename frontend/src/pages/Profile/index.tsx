@@ -5,7 +5,7 @@ import { formatOptionDate } from "../../utils/helpers";
 const ProfilePage = () => {
   const { userAuthenticated } = useAuth();
   return (
-    <div className="h-fit pt-16 md:pt-20">
+    <div className="h-fit pt-16 md:pt-20 px-5">
       <div className="max-w-md md:max-w-2xl mx-auto p-2 md:p-4 py-6 md:py-8">
         <div className="bg-base-300 rounded-xl p-6 space-y-6">
           <div className="text-center">
