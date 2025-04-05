@@ -8,7 +8,7 @@
     "frontend"
   ],
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --parallel",
     "build": "cd frontend && yarn install && yarn build && cd ../backend && yarn install",
     "start": "cd backend && yarn start",
     "preview": "turbo run serve --filter=backend",
