@@ -13,7 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   isDisabled?: boolean;
   fullWidth?: boolean;
-  // isIconButton?: boolean;
+  iconButton?: React.ReactNode;
   withAnimation?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
@@ -33,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       isDisabled = false,
       fullWidth = false,
-      // isIconButton = false,
+      iconButton,
       withAnimation = false,
       startIcon,
       endIcon,
@@ -112,6 +112,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <span className="loading loading-spinner" />
         ) : (
           <>
+            {iconButton || null}
             {startIcon && <div className="mr-1">{startIcon}</div>}
             {label || null}
             {endIcon && <div className="ml-1">{endIcon}</div>}

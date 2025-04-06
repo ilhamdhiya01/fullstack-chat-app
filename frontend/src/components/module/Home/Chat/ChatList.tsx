@@ -4,7 +4,7 @@
 import classNames from "classnames";
 import { isSameDay, parseISO } from "date-fns";
 
-import useMessage from "../../../../hooks/message";
+import { useAuth } from "../../../../hooks/auth";
 import useMessageStore from "../../../../stores/message/useMessageStore";
 import { formatMessageTime } from "../../../../utils/helpers";
 
@@ -12,8 +12,8 @@ import ChatItem from "./ChatItem";
 import DateDivider from "./DateDivider";
 
 const ChatList = () => {
-  const { userSelected } = useMessageStore();
-  const { messagesData } = useMessage();
+  const { userAuthenticated } = useAuth();
+  const { messages } = useMessageStore();
   const renderDateDivider = (currentDate: string, prevDate?: string) => {
     if (!prevDate) return true;
 
@@ -24,14 +24,14 @@ const ChatList = () => {
   };
   return (
     <>
-      {messagesData?.map((item, index) => {
+      {messages?.map((item, index) => {
         const isFirstMessage =
-          index === 0 || messagesData[index - 1].senderId !== item.senderId;
+          index === 0 || messages[index - 1].senderId !== item.senderId;
         const isSenderChanged =
-          index > 0 && messagesData[index - 1].senderId !== item.senderId;
+          index > 0 && messages[index - 1].senderId !== item.senderId;
         const showDateDivider = renderDateDivider(
           item.createdAt,
-          index > 0 ? messagesData[index - 1].createdAt : undefined,
+          index > 0 ? messages[index - 1].createdAt : undefined,
         );
 
         return (
@@ -45,10 +45,11 @@ const ChatList = () => {
               })}
             >
               <ChatItem
-                isSender={item.senderId === userSelected?._id}
+                isSender={item.senderId === userAuthenticated?._id}
                 message={item.text}
                 time={formatMessageTime(item.createdAt)}
                 isFirstMessage={isFirstMessage}
+                imageUrl={item.image || undefined}
               />
             </div>
           </>

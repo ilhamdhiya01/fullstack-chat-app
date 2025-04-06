@@ -36,10 +36,10 @@ export const getMessages = async (
   }
 };
 
-export const sendMessage = async (data: any) => {
+export const sendMessage = async (data: any): Promise<MessageResponse> => {
   try {
     const { id, ...body } = data;
-    const response = await api.post(
+    const response = await api.post<MessageResponse>(
       replaceString(PATH_API_BE_SEND_MESSAGE, {
         ":id": id,
       }),

@@ -9,7 +9,7 @@ const MainLayout = () => {
     <div data-theme={theme}>
       <Navbar />
       <div className="min-h-screen">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <Outlet />
         </div>
       </div>

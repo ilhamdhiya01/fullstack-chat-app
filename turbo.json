@@ -2,8 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "dev": {
-      "dependsOn": ["^dev"],
-      "outputs": []
+      "cache": false,
+      "persistent": true
     },
     "build": {
       "dependsOn": ["^build"],

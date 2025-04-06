@@ -14,10 +14,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
+    watch: {
+      usePolling: true, // Untuk better file watching di Docker
+    },
     port: 5173,
     proxy: {
       "/api": {
-        target: "http://localhost:5173",
+        target: "http://localhost:5001",
         changeOrigin: true,
       },
     },
