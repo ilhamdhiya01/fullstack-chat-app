@@ -18,7 +18,6 @@ export const checkUser = async (): Promise<CheckUserResponse> => {
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
-    console.log("Error fetching user", err.response?.data);
     throw err;
   }
 };
@@ -29,7 +28,6 @@ export const signup = async (data: SignupFormData): Promise<SignupResponse> => {
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
-    console.log("Error signing up", err.response?.data);
     throw err;
   }
 };
@@ -40,7 +38,6 @@ export const login = async (data: LoginFormData): Promise<LoginResponse> => {
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
-    console.log("Error login", err.response?.data);
     throw err;
   }
 };
@@ -51,7 +48,6 @@ export const logout = async () => {
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
-    console.log("Error logout", err.response?.data);
     throw err;
   }
 };
@@ -62,7 +58,6 @@ export const updateProfile = async (data: ProfileFormData) => {
     return response.data;
   } catch (error: unknown) {
     const err = error as AxiosError;
-    console.log("Error updating profile", err.response?.data);
     throw err;
   }
 };

@@ -8,12 +8,14 @@ import { toast } from "react-hot-toast";
 import type { LoginFormData } from "../../../../constants/schema/LoginSchema";
 import { LoginSchema } from "../../../../constants/schema/LoginSchema";
 import { useAuth } from "../../../../hooks/auth";
+import useSocket from "../../../../hooks/socket";
 import { login } from "../../../../services/fetcher/auth";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { connectSocket } = useSocket();
   const { refetch } = useAuth();
   const {
     handleSubmit,
@@ -27,9 +29,10 @@ const LoginForm = () => {
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Login successful");
-      refetch();
+      await refetch();
+      connectSocket();
       reset();
     },
     onError: (error: any) => {

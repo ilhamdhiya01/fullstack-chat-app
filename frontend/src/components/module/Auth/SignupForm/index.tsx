@@ -8,12 +8,14 @@ import { toast } from "react-hot-toast";
 import type { SignupFormData } from "../../../../constants/schema/SignupSchema";
 import { SignupSchema } from "../../../../constants/schema/SignupSchema";
 import { useAuth } from "../../../../hooks/auth";
+import useSocket from "../../../../hooks/socket";
 import { signup } from "../../../../services/fetcher/auth";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { connectSocket } = useSocket();
   const { refetch } = useAuth();
   const {
     handleSubmit,
@@ -27,9 +29,10 @@ const SignupForm = () => {
 
   const signupMutation = useMutation({
     mutationFn: signup,
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Account created successfully");
-      refetch();
+      await refetch();
+      connectSocket();
       reset();
     },
     onError: (error: any) => {

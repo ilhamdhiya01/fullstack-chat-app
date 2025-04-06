@@ -4,13 +4,12 @@ import dotenv from "dotenv";
 import express from "express";
 import path from "path";
 import { connectDB } from "./lib/db.js";
+import { app, server } from "./lib/socket.js";
 import authRouter from "./routes/auth.router.js";
 import messageRouter from "./routes/message.router.js";
 
 // Load environment variables
 dotenv.config();
-
-const app = express();
 
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
@@ -20,7 +19,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.NODE_ENV === "production" 
+      ? true  // Allow all origins in production
+      : ["http://localhost:5173", "http://127.0.0.1:5173"],  // Local development
     credentials: true,
   })
 );
@@ -37,7 +38,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   connectDB();
 });
