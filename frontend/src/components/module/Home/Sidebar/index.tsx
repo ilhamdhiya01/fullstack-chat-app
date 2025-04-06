@@ -37,7 +37,7 @@ const Sidebar = () => {
   return (
     <aside
       className={classNames(
-        "fixed md:relative h-full lg:w-96 border-r border-base-300 flex flex-col transition-transform duration-300 bg-base-200",
+        "fixed md:relative h-full lg:w-96 border-r border-base-300 flex flex-col transition-transform duration-300 bg-base-200 mt-16 md:mt-0",
         {
           "-translate-x-full md:translate-x-0 w-0 md:w-auto": !showSidebar,
           "translate-x-0 w-full md:w-auto": showSidebar,
