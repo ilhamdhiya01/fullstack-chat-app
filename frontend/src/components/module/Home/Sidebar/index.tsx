@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import classNames from "classnames";
+import { useMemo } from "react";
 
 import useMessage from "../../../../hooks/message";
+import useSocket from "../../../../hooks/socket";
 import useMessageStore from "../../../../stores/message/useMessageStore";
 
 import SidebarHeader from "./SidebarHeader";
@@ -11,11 +13,26 @@ const Sidebar = () => {
   const { usersData = [] } = useMessage();
   const { setUserSelected, userSelected, showSidebar, setShowSidebar } =
     useMessageStore();
+  const { onlineUsersId } = useSocket();
 
-  const handleCLlickUser = (user: User) => {
+  const handleClickUser = (user: User) => {
     setUserSelected(user);
     setShowSidebar(false);
   };
+
+  // Sort users: online users first, then offline
+  const sortedUsers = useMemo(
+    () =>
+      [...usersData].sort((a, b) => {
+        const isAOnline = onlineUsersId.includes(a._id);
+        const isBOnline = onlineUsersId.includes(b._id);
+
+        if (isAOnline && !isBOnline) return -1;
+        if (!isAOnline && isBOnline) return 1;
+        return 0;
+      }),
+    [usersData, onlineUsersId],
+  );
 
   return (
     <aside
@@ -29,12 +46,13 @@ const Sidebar = () => {
     >
       <SidebarHeader />
       <div className="overflow-y-auto w-full">
-        {usersData.map((user) => (
+        {sortedUsers.map((user) => (
           <UserItem
             key={user._id}
             user={user}
             isSelected={user._id === userSelected?._id}
-            onSelected={() => handleCLlickUser(user)}
+            onSelected={() => handleClickUser(user)}
+            isOnline={onlineUsersId.includes(user._id)}
           />
         ))}
       </div>

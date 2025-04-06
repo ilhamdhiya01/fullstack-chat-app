@@ -7,6 +7,7 @@ import useMessageStore from "../../stores/message/useMessageStore";
 
 const HomePage = () => {
   const { userSelected, showSidebar } = useMessageStore();
+
   return (
     <div className="h-screen bg-base-300">
       <div className="flex items-center h-full pt-[65px] overflow-x-hidden">

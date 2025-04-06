@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Socket } from "socket.io-client";
 import { io } from "socket.io-client";
 
@@ -8,9 +9,10 @@ import { useAuth } from "../auth";
 const useSocket = () => {
   const { userAuthenticated } = useAuth();
   const socketRef = useRef<Socket | null>(null);
+  const [onlineUsersId, setOnlineUsersId] = useState<Array<string>>([]);
   const BASE_URL = "http://localhost:5001";
 
-  const connectSocket = () => {
+  const connectSocket = useCallback(() => {
     if (!userAuthenticated || socketRef.current?.connected) return;
 
     try {
@@ -33,12 +35,16 @@ const useSocket = () => {
       });
 
       socket.on("getOnlineUsers", (users) => {
-        console.log("Online users:", users);
+        setOnlineUsersId(users);
       });
     } catch (error) {
       console.error("Error creating socket:", error);
     }
-  };
+  }, [userAuthenticated]);
+
+  useEffect(() => {
+    connectSocket();
+  }, [userAuthenticated]);
 
   const disconnectSocket = () => {
     if (socketRef.current?.connected) {
@@ -55,7 +61,12 @@ const useSocket = () => {
     [],
   );
 
-  return { socket: socketRef.current, connectSocket, disconnectSocket };
+  return {
+    socket: socketRef.current,
+    connectSocket,
+    disconnectSocket,
+    onlineUsersId,
+  };
 };
 
 export default useSocket;

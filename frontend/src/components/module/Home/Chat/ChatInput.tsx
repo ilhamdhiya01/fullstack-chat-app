@@ -1,13 +1,25 @@
+/* eslint-disable no-underscore-dangle */
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image, Send, X } from "lucide-react";
 import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
+import { MESSAGES } from "../../../../constants/queryKey";
+import type { SendMessageFormData } from "../../../../constants/schema/SendMessageSchema";
+import { SendMessageSchema } from "../../../../constants/schema/SendMessageSchema";
+import { sendMessage } from "../../../../services/fetcher/message";
+import useMessageStore from "../../../../stores/message/useMessageStore";
 import Button from "../../../ui/Button";
 import TextArea from "../../../ui/TextArea";
 
 const ChatInput = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { userSelected, setMessages, messages } = useMessageStore();
+
+  const queryClient = useQueryClient();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -31,6 +43,41 @@ const ChatInput = () => {
     setImagePreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
+
+  const { register, handleSubmit, reset, watch } = useForm<SendMessageFormData>(
+    {
+      mode: "onBlur",
+      resolver: yupResolver(SendMessageSchema),
+    },
+  );
+
+  const text = watch("text");
+
+  const sendMessageMutation = useMutation({
+    mutationFn: sendMessage,
+    onSuccess: async (res) => {
+      setMessages([...messages, res]);
+      // Update react-query cache
+      queryClient.setQueryData(
+        [MESSAGES, userSelected?._id],
+        (oldData: Array<MessageResponse> = []) => [...oldData, res],
+      );
+      reset();
+      setImagePreview(null);
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data.message);
+    },
+  });
+
+  const onSubmit = (data: SendMessageFormData) => {
+    sendMessageMutation.mutateAsync({
+      text: data.text?.trim(),
+      id: userSelected?._id,
+      image: imagePreview,
+    });
+  };
+
   return (
     <>
       {imagePreview && (
@@ -52,7 +99,7 @@ const ChatInput = () => {
           </div>
         </div>
       )}
-      <form className="flex items-end gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex items-end gap-2">
         <input
           type="file"
           accept="image/*"
@@ -69,6 +116,7 @@ const ChatInput = () => {
         />
         <div className="flex-1">
           <TextArea
+            {...register("text")}
             fullWidth
             placeholder="Type a message..."
             className="h-5 placeholder:text-base-content/50"
@@ -78,6 +126,9 @@ const ChatInput = () => {
           type="submit"
           variant="contained"
           iconButton={<Send size={22} />}
+          isDisabled={
+            sendMessageMutation.isPending || (!imagePreview && !text?.trim())
+          }
         />
       </form>
     </>
