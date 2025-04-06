@@ -10,7 +10,8 @@ const useSocket = () => {
   const { userAuthenticated } = useAuth();
   const socketRef = useRef<Socket | null>(null);
   const [onlineUsersId, setOnlineUsersId] = useState<Array<string>>([]);
-  const BASE_URL = "http://localhost:5001";
+  const BASE_URL =
+    import.meta.env.VITE_API_URL || "https://chatingan-asyik.onrender.com/api";
 
   const connectSocket = useCallback(() => {
     if (!userAuthenticated || socketRef.current?.connected) return;
